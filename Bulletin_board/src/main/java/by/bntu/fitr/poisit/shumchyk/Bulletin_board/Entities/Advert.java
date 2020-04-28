@@ -44,8 +44,8 @@ public class Advert {
     public Advert() {
     }
 
-    public Advert(long id, String text, User author, List<Tag> tags) {
-        this.id = id;
+    public Advert(String text, User author, List<Tag> tags) {
+
         this.text = text;
         this.author = author;
         this.tags = tags;
