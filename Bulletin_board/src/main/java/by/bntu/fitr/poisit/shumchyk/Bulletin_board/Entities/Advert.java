@@ -1,10 +1,10 @@
-package Entities;
+package by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.List;
 
 @Entity
 public class Advert {
@@ -13,8 +13,8 @@ public class Advert {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String text;
-    private User author;
-    private List<Tag> tags;
+    private String author;
+    private String tags;
 
     public long getId() {
         return id;
@@ -32,26 +32,26 @@ public class Advert {
         this.text = text;
     }
 
-    public User getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 
-    public List<Tag> getTags() {
+    public String getTags() {
         return tags;
     }
 
-    public void setTags(List<Tag> tags) {
+    public void setTags(String tags) {
         this.tags = tags;
     }
 
     public Advert() {
     }
 
-    public Advert(String text, User author, List<Tag> tags) {
+    public Advert(String text, String author, String tags) {
 
         this.text = text;
         this.author = author;

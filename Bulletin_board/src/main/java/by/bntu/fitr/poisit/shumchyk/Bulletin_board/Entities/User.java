@@ -1,6 +1,12 @@
-package Entities;
+package by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String userName;
     private String password;
