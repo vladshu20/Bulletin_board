@@ -1,4 +1,4 @@
-package by.bntu.fitr.poisit.shumchyk.Bulletin_board.repos;
+package by.bntu.fitr.poisit.shumchyk.Bulletin_board.dao;
 
 
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities.Advert;
