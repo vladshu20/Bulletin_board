@@ -11,7 +11,7 @@ public class Advert {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String text;
-    @OneToOne
+    @ManyToOne
     private User author;
     @OneToMany
     private List<Tag> tags;

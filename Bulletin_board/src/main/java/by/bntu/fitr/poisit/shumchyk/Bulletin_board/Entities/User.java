@@ -1,6 +1,7 @@
 package by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Users")
@@ -12,6 +13,8 @@ public class User {
     private String password;
     private String email;
     private String firstName;
+    @OneToMany
+    private List<Advert> adverts;
 
     public long getId() {
         return id;
