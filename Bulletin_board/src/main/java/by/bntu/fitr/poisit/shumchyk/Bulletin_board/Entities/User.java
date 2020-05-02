@@ -13,7 +13,7 @@ public class User {
     private String password;
     private String email;
     private String firstName;
-    @OneToMany
+    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
     private List<Advert> adverts;
 
     public long getId() {

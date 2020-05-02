@@ -12,8 +12,9 @@ public class Advert {
     private long id;
     private String text;
     @ManyToOne
+    @JoinColumn(name = "author_id", nullable = false)
     private User author;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Tag> tags;
 
     public long getId() {
