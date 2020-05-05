@@ -22,7 +22,12 @@ public class MainController {
     }
 
     @GetMapping("/adverts")
-    public String ads() {
+    public String adverts() {
         return "adverts";
+    }
+
+    @RequestMapping("/hello")
+    public String hello() {
+        return "hello";
     }
 }
