@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -13,12 +13,37 @@
 <body>
 
 
-<div class="page-title">Bulletin Board Demo</div>
-<div class="topnav">
-    <a class="active" href="">Home</a>
-    <a href="">News</a>
-    <a href="">Contact</a>
-    <a href="">About</a>
+<div th:replace="fragments/navigation :: nav"></div>
+<div>
+    <!--<nav class="navbar navbar-expand-lg navbar-dark bg-primary">-->
+    <!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"-->
+    <!--            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">-->
+    <!--        <span class="navbar-toggler-icon"></span>-->
+    <!--    </button>-->
+    <!--    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">-->
+    <!--        <a class="navbar-brand" href="#">Bullba</a>-->
+    <!--        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">-->
+    <!--            <li class="nav-item active">-->
+    <!--                <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>-->
+    <!--            </li>-->
+    <!--            <li class="nav-item">-->
+    <!--                <a class="nav-link" href="#">SMTH</a>-->
+    <!--            </li>-->
+    <!--            <li class="nav-item">-->
+    <!--                <a class="nav-link" th:href="@{/}">Login</a>-->
+    <!--            </li>-->
+    <!--        </ul>-->
+    <!--        <form class="form-inline my-2 my-lg-0">-->
+    <!--            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+    <!--            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+    <!--        </form>-->
+    <!--    </div>-->
+    <!--</nav>-->
+</div>
+<div class="d-flex align-content-center flex-wrap">
+    <div class="p-2">Flex элемент</div>
+    <div class="p-2">Flex элемент</div>
+    <div class="p-2">Flex элемент</div>
 </div>
 <div class="demo-container">
     <h3>Demo content</h3>

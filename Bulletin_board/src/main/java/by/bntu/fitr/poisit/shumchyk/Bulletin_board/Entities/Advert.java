@@ -1,19 +1,20 @@
-package Entities;
+package by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class Advert {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String text;
+    @ManyToOne
+    @JoinColumn(name = "author_id", nullable = false)
     private User author;
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Tag> tags;
 
     public long getId() {
