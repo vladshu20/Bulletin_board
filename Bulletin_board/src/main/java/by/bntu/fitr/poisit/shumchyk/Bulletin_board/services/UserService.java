@@ -1,6 +1,6 @@
 package by.bntu.fitr.poisit.shumchyk.Bulletin_board.services;
 
-import by.bntu.fitr.poisit.shumchyk.Bulletin_board.dao.IUserRepository;
+import by.bntu.fitr.poisit.shumchyk.Bulletin_board.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

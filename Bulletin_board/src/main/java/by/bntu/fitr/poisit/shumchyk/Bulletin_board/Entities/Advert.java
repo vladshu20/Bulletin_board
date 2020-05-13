@@ -2,7 +2,6 @@ package by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities;
 
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Advert {
@@ -14,8 +13,10 @@ public class Advert {
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
     private User author;
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Tag> tags;
+
+    private String tag;
+
+    private String filename;
 
     public long getId() {
         return id;
@@ -41,21 +42,29 @@ public class Advert {
         this.author = author;
     }
 
-    public List<Tag> getTags() {
-        return tags;
+    public String getTag() {
+        return tag;
     }
 
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
     public Advert() {
     }
 
-    public Advert(String text, User author, List<Tag> tags) {
+    public Advert(String text, User author, String tag) {
 
         this.text = text;
         this.author = author;
-        this.tags = tags;
+        this.tag = tag;
     }
 }

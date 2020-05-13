@@ -105,6 +105,10 @@ public class User implements UserDetails {
         this.firstName = firstName;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public User() {
     }
 

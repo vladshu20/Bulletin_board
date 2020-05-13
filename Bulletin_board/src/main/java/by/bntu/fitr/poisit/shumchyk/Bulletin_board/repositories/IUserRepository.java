@@ -1,4 +1,4 @@
-package by.bntu.fitr.poisit.shumchyk.Bulletin_board.dao;
+package by.bntu.fitr.poisit.shumchyk.Bulletin_board.repositories;
 
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;

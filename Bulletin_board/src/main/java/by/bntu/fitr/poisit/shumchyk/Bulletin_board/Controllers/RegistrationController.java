@@ -2,7 +2,7 @@ package by.bntu.fitr.poisit.shumchyk.Bulletin_board.Controllers;
 
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities.Role;
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities.User;
-import by.bntu.fitr.poisit.shumchyk.Bulletin_board.dao.IUserRepository;
+import by.bntu.fitr.poisit.shumchyk.Bulletin_board.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +26,7 @@ public class RegistrationController {
         User userFromDb = userRepository.findByUsername(user.getUsername());
 
         if (userFromDb != null) {
-            model.put("message", "User exist");
+            model.put("message", "User exists");
             return "registration";
         }
         user.setActive(true);

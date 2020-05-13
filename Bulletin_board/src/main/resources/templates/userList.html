@@ -1,5 +1,5 @@
-!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,29 @@
 </head>
 <body>
 <div>
+    <div th:replace="fragments/navigation :: nav"></div>
+    <div class="row justify-content-center align-items-center">
+        <div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.getFirstName()}"/>
+                    <td th:text="${user.getRoles()}"/>
+                    <td><label><input type="checkbox" th:text="*{user.getUsername()}"></label></td>
+                    <td><a th:href="{}/user/${user.id}"></a></td>
+                </tr>
+                </tbody>
 
+            </table>
+        </div>
+    </div>
 </div>
 </body>
 </html>
