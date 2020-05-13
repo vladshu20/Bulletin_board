@@ -14,14 +14,18 @@
 <div th:replace="fragments/navigation :: nav"></div>
 <div th:action="@{/user}" method="post">
     <div th:object="${user}">
-        <input type="text" id="username" name="username" th:text="{user}" class="input-xlarge">
-    </div>
-    <th:block th:each="role : ${roles}">
-        <div th:value="user">
-            <label><input type="checkbox" th:text="*{role.name()}" th:value="${role}"></label>
-            <label><input checked th:name="${role}" th:value="${user.roles}"></label>
+        <input type="text" id="username" name="username" th:text="*{username}" class="input-xlarge">
+
+
+        <div th:each="role : ${roles}">
+            <label><input type="checkbox" th:text="${role}" th:name="cb"></label>
+            <div th:each="urole : ${user.getRoles()}">
+                <div th:if="urole == role">
+                    <label><input th:checked="checked" th:name="${role}" th:value="${user.roles}"></label>
+                </div>
+            </div>
         </div>
-    </th:block>
+    </div>
     <button type="submit">Save</button>
     <input type="hidden" id="userId" name="userId" th:value="${user.getId()}" class="input-xlarge">
 </div>

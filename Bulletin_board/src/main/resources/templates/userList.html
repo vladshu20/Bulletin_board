@@ -28,7 +28,7 @@
                     <td th:text="${user.getFirstName()}"/>
                     <td th:text="${user.getRoles()}"/>
                     <td><label><input type="checkbox" th:text="*{user.getUsername()}"></label></td>
-                    <td><a th:href="{}/user/${user.id}"></a></td>
+                    <td><a th:href="@{/users(${user.id})}" th:text="Edit" th:action="@{/userList}"></a></td>
                 </tr>
                 </tbody>
 

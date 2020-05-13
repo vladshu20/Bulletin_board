@@ -69,21 +69,34 @@ public class MainController {
                 uploadDir.mkdir();
             }
 
+            File file1 = new File(uploadPath + "wer.txt");
+
+
             String uuidFile = UUID.randomUUID().toString();
             String resultFilename = uuidFile + "." + file.getOriginalFilename();
 
             file.transferTo(new File(uploadPath + "/" + resultFilename));
+            try {
 
-            advert.setFilename(resultFilename);
+                advert.setFilename(resultFilename);
+                advertRepository.save(advert);
+            } catch (Exception e) {
+                // Print the wrapper exception:
+                System.out.println("Wrapper exception: " + e);
+
+                // Print the 'actual' exception:
+                System.out.println("Underlying exception: " + e.getCause());
+            }
+
         }
 
-        advertRepository.save(advert);
+
 
         Iterable<Advert> adverts = advertRepository.findAll();
 
         model.put("adverts", adverts);
 
-        return "main";
+        return "adverts";
     }
 
 
