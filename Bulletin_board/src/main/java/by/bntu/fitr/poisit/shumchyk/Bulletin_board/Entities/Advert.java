@@ -2,26 +2,28 @@ package by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities;
 
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Advert {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String text;
     @ManyToOne
-    @JoinColumn(name = "author_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User author;
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Tag> tags;
 
-    public long getId() {
+    private String tag;
+
+    private String filename;
+
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -41,21 +43,29 @@ public class Advert {
         this.author = author;
     }
 
-    public List<Tag> getTags() {
-        return tags;
+    public String getTag() {
+        return tag;
     }
 
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
     public Advert() {
     }
 
-    public Advert(String text, User author, List<Tag> tags) {
+    public Advert(String text, User author, String tag) {
 
         this.text = text;
         this.author = author;
-        this.tags = tags;
+        this.tag = tag;
     }
 }

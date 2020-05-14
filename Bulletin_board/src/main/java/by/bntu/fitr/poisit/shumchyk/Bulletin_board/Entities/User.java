@@ -5,7 +5,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,15 +12,16 @@ import java.util.Set;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @Column(name = "user_name")
     private String username;
     private String password;
     private String email;
     @Column(name = "first_name")
     private String firstName;
-    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
-    private List<Advert> adverts;
+    private String activationCode;
+//    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
+//    private List<Advert> adverts;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -84,6 +84,13 @@ public class User implements UserDetails {
         return roles;
     }
 
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
+    }
 
     public void setPassword(String password) {
         this.password = password;
@@ -103,6 +110,10 @@ public class User implements UserDetails {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public User() {
