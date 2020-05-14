@@ -12,8 +12,8 @@
 </head>
 <body>
 <div th:replace="fragments/navigation :: nav"></div>
-<div th:action="@{/user}" method="post">
-    <div th:object="${user}">
+<form th:action="@{/edit}" method="post">
+    <div th:content="${user}">
         <input type="text" id="username" name="username" th:text="*{username}" class="input-xlarge">
 
 
@@ -27,8 +27,8 @@
         </div>
     </div>
     <button type="submit">Save</button>
-    <input type="hidden" id="userId" name="userId" th:value="${user.getId()}" class="input-xlarge">
-</div>
+    <input type="hidden" id="userId" name="userId" th:value="${user.getId()}" class="input-xlarge"/>
+
 </form>
 
 
