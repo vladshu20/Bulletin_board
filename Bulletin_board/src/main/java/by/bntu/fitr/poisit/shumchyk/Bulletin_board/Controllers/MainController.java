@@ -3,6 +3,8 @@ package by.bntu.fitr.poisit.shumchyk.Bulletin_board.Controllers;
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities.Advert;
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities.User;
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.repositories.IAdvertRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,6 +26,8 @@ public class MainController {
     @Autowired
     private IAdvertRepository advertRepository;
 
+
+
     @Value("${upload.path}")
     private String uploadPath;
 
@@ -37,9 +41,11 @@ public class MainController {
         return "login";
     }
 
+    //TODO: search with tags
     @GetMapping("/adverts")
     public String adverts(@RequestParam(required = false, defaultValue = "") String filter,
                           Model model) {
+
         Iterable<Advert> adverts = advertRepository.findAll();
 
         if (filter != null && !filter.isEmpty()) {
@@ -89,7 +95,6 @@ public class MainController {
             }
 
         }
-
 
 
         Iterable<Advert> adverts = advertRepository.findAll();

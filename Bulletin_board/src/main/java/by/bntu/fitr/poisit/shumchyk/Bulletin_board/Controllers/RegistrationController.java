@@ -2,6 +2,9 @@ package by.bntu.fitr.poisit.shumchyk.Bulletin_board.Controllers;
 
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities.User;
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.services.UserService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +19,10 @@ public class RegistrationController {
     @Autowired
     private UserService userService;
 
+    private static Logger logger =  LoggerFactory.getLogger(RegistrationController.class);
+
+
+
     @GetMapping("/registration")
     public String registration() {
         return "registration";
@@ -24,7 +31,7 @@ public class RegistrationController {
     @PostMapping("/registration")
     public String addUser(User user, Map<String, Object> model) {
 
-
+        logger.info("adding user");
         if (!userService.addUser(user)) {
             model.put("message", "User exists");
             return "registration";
