@@ -3,8 +3,6 @@ package by.bntu.fitr.poisit.shumchyk.Bulletin_board.Controllers;
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities.Advert;
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities.User;
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.repositories.IAdvertRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -105,8 +103,5 @@ public class MainController {
     }
 
 
-    @RequestMapping("/hello")
-    public String hello() {
-        return "hello";
-    }
+
 }

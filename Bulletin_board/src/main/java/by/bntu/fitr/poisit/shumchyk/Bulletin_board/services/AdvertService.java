@@ -20,4 +20,6 @@ public class AdvertService {
     public List<Advert> getAllAdverts() {
         return advertRepository.findAll();
     }
+
+
 }
