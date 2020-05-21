@@ -2,8 +2,6 @@ package by.bntu.fitr.poisit.shumchyk.Bulletin_board.Controllers;
 
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities.User;
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.services.UserService;
-
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.SQLOutput;
 import java.util.Map;
 
 @Controller
@@ -21,8 +20,7 @@ public class RegistrationController {
     @Autowired
     private UserService userService;
 
-    private static Logger logger =  LogManager.getLogger(RegistrationController.class.getName());
-
+    private static Logger logger = LogManager.getLogger(RegistrationController.class.getName());
 
 
     @GetMapping("/registration")
@@ -31,10 +29,12 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String addUser(User user, Map<String, Object> model,@RequestParam String passwordConfirmation) {
+    public String addUser(User user, Map<String, Object> model, @RequestParam String passwordConfirmation) {
 
-        if(!passwordConfirmation.equals(user.getPassword())){
-            model.put("message","password and confirmation must be the same");
+
+        if (!passwordConfirmation.equals(user.getPassword())) {
+            model.put("message", "password and confirmation must be the same");
+            return "registration";
         }
 
         logger.info("adding user");
@@ -49,15 +49,18 @@ public class RegistrationController {
 
     @GetMapping("/activate/{code}")
     public String activate(Model model, @PathVariable String code) {
+
         boolean isActivated = userService.activateUser(code);
 
         if (isActivated) {
+            logger.info("succesed");
             model.addAttribute("message", "User successfully activated");
         } else {
+            logger.info("failed");
             model.addAttribute("message", "Activation code is not found");
         }
 
-        return "login";
+        return "redirect:/login";
 
     }
 

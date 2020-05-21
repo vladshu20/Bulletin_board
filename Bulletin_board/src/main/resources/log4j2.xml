@@ -1,32 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration>
-    <Properties>
-        <Property name="socket.host">${bundle:application:logstash.host}</Property>
-        <Property name="socket.port">${bundle:application:logstash.port}</Property>
-        <Property name="console.thresholdFilter">${bundle:application:logger.console.tresholdFilter}</Property>
-        <Property name="socket.thresholdFilter">${bundle:application:logger.socket.tresholdFilter}</Property>
-    </Properties>
+<Configuration status="DEBUG">
     <Appenders>
-        <Console name="CONSOLE" target="SYSTEM_OUT">
-            <ThresholdFilter level="${console.thresholdFilter}"/>
-            <PatternLayout pattern="%d %-5p [%t] %c{10} - %m%n"/>
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
-        <Socket name="SOCKET" host="${socket.host}" port="${socket.port}" immediateFlush="true">
-            <ThresholdFilter level="${socket.thresholdFilter}"/>
-            <JSONLayout eventEol="true" compact="true"/>
-        </Socket>
-        <Async name="ASYNC">
-            <AppenderRef ref="CONSOLE"/>
-            <AppenderRef ref="SOCKET"/>
-        </Async>
+        <File name="LogToFile" fileName="logs/app.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
     </Appenders>
-
     <Loggers>
-        <Logger name="ru.example" level="debug" additivity="false">
-            <AppenderRef ref="ASYNC"/>
+        <Logger name="by.bntu.fitr.poisit.shumchyk" level="debug" additivity="true">
+            <AppenderRef ref="LogToFile"/>
+            <AppenderRef ref="LogToConsole"/>
+        </Logger>
+        <Logger name="by.bntu.fitr.poisit.shumchyk.info" level="info" additivity="false">
+
+            <AppenderRef ref="LogToConsole"/>
+        </Logger>
+        <Logger name="org.springframework.boot" level="error" additivity="false">
+            <AppenderRef ref="LogToConsole"/>
         </Logger>
         <Root level="error">
-            <AppenderRef ref="ASYNC"/>
+            <AppenderRef ref="LogToFile"/>
+            <AppenderRef ref="LogToConsole"/>
         </Root>
     </Loggers>
 </Configuration>

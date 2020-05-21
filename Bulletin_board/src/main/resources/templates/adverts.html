@@ -15,26 +15,34 @@
 </head>
 <body>
 <div th:replace="fragments/navigation :: nav"></div>
-<div class="container mt-5">
-    <form method="post" th:action="@{/adverts}" enctype="multipart/form-data">
-        <!--    <div><input type="file" value="Add"/></div>-->
-        <div class="form-group">
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" name="file" id="customFile">
-                <label class="custom-file-label" for="customFile">Выберите картинку</label>
-            </div>
-            <div class="form-group">
-                <label class="text-info">Text:</label><br>
-                <input type="text" name="text" id="text" class="form-control">
-            </div>
-            <div class="form-group">
-                <label class="text-info">Tag:</label><br>
-                <input type="text" name="tag" id="tag" class="form-control">
-            </div>
-            <div><input type="submit" value="Add"/></div>
-        </div>
-    </form>
 
+<div class="container mt-5">
+    <a class="btn btn-primary" data-toggle="collapse" href="#collapseAddAdvert" role="button" aria-expanded="false"
+       aria-controls="collapseExample">
+        Add advert
+    </a>
+    <div class="collapse <#if advert??>show</#if>" id="collapseAddAdvert">
+        <form method="post" th:action="@{/adverts}" enctype="multipart/form-data">
+
+            <!--    <div><input type="file" value="Add"/></div>-->
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="file" id="customFile">
+                    <label class="custom-file-label" for="customFile">Выберите картинку</label>
+                </div>
+                <div class="form-group">
+                    <label class="text-info">Text:</label><br>
+                    <input type="text" name="text" id="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="text-info">Tag:</label><br>
+                    <input type="text" name="tag" id="tag" class="form-control">
+                </div>
+                <div><input type="submit" value="Add"/></div>
+            </div>
+        </form>
+
+    </div>
     <div class="card-columns">
         <div th:each="advert : ${adverts}">
             <div class="card my-3">
@@ -47,7 +55,7 @@
                          alt="Card image cap">
                 </div>
                 <div class="card-body">
-<!--                    <span class="badge badge-primary">Главный</span>-->
+                    <!--                    <span class="badge badge-primary">Главный</span>-->
                     <h5 class="card-title" th:text="${advert.getTag()}"></h5>
                     <p class="card-text" th:text="${advert.getText()}"></p>
 
@@ -61,6 +69,7 @@
         </div>
     </div>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>

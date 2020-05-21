@@ -3,10 +3,13 @@ package by.bntu.fitr.poisit.shumchyk.Bulletin_board.services;
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities.Role;
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities.User;
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.repositories.IUserRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -20,6 +23,11 @@ public class UserService implements UserDetailsService {
     @Autowired
     private MailSender mailSender;
 
+    @Autowired
+    private BCryptPasswordEncoder cryptPasswordEncoder;
+
+    private static Logger logger= LogManager.getLogger(UserService.class.getName());
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username);
@@ -32,11 +40,18 @@ public class UserService implements UserDetailsService {
             return false;
         }
 
+        //user.setActive(false);
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         user.setActivationCode(UUID.randomUUID().toString());
+        user.setPassword(cryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+        sendMessage(user);
 
+        return true;
+    }
+
+    private void sendMessage(User user) {
         if (!StringUtils.isEmpty(user.getEmail())) {
             String message = String.format("Hello, %s. \n" +
                             "Welcome to Bullba! Please, visit next " +
@@ -44,9 +59,6 @@ public class UserService implements UserDetailsService {
                     user.getActivationCode());
             mailSender.send(user.getEmail(), "Activation code", message);
         }
-
-
-        return true;
     }
 
     public boolean deleteUser(User user) {
@@ -58,8 +70,10 @@ public class UserService implements UserDetailsService {
         User user = userRepository.findByActivationCode(code);
 
         if (user == null) {
+            logger.info("activation failed");
             return false;
         }
+//        user.setActive(true);
         user.setActivationCode(null);
         userRepository.save(user);
         return true;
@@ -93,8 +107,14 @@ public class UserService implements UserDetailsService {
 
         boolean isChanged = (email != null && !email.equals(userEmail)) ||
                 (email != null && !userEmail.equals(email));
-        if (isChanged){
+        if (isChanged) {
 
+            user.setEmail(email);
+
+            if (!StringUtils.isEmpty(email)) {
+                user.setActivationCode(UUID.randomUUID().toString());
+            }
+            sendMessage(user);
         }
     }
 }

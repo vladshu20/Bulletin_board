@@ -11,6 +11,24 @@
 
 </head>
 <body>
+<div th:replace="fragments/navigation :: nav"></div>
 <h5 th:text="${userName}"></h5>
+<div>
+<form method="post" th:action="@{/profile}" >
+    <!--    <div><input type="file" value="Add"/></div>-->
+    <div class="form-group">
+
+        <div class="form-group">
+            <label class="text-info"></label><br>
+            <input type="text" name="text" id="text" class="form-control">
+        </div>
+        <div class="form-group">
+            <label class="text-info">Tag:</label><br>
+            <input type="text" name="tag" id="tag" class="form-control">
+        </div>
+        <div><input type="submit" value="Add"/></div>
+    </div>
+</form>
+</div>
 </body>
 </html>
