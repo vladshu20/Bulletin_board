@@ -1,6 +1,7 @@
 package by.bntu.fitr.poisit.shumchyk.Bulletin_board.services;
 
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities.Advert;
+import by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities.User;
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.repositories.IAdvertRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,6 +32,9 @@ public class AdvertService {
     }
     public List<Advert> getAdvertsByTag(String tag) {
         return advertRepository.findByTag(tag);
+    }
+    public List<Advert> getAdvertsByUserId(Long id) {
+        return advertRepository.findByAuthorId(id);
     }
 
     public void deleteAdvert(Advert advert){

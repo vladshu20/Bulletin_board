@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface IAdvertRepository extends JpaRepository<Advert, Long> {
     List<Advert> findByTag(String tag);
-    List<Advert> findByAuthor(User user);
+    List<Advert> findByAuthorId(Long userId);
 
 }

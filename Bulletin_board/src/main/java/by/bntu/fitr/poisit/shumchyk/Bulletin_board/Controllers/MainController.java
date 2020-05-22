@@ -65,7 +65,8 @@ public class MainController {
     }
 
     @GetMapping("/adverts")
-    public String adverts(@RequestParam(required = false, defaultValue = "") String filter,
+    public String adverts(@AuthenticationPrincipal User user,
+                          @RequestParam(required = false, defaultValue = "") String filter,
                           Model model) {
 
         logger.info("getting adverts page");
@@ -76,7 +77,7 @@ public class MainController {
         if (filter != null && !filter.isEmpty()) {
             adverts = advertService.getAdvertsByTag(filter);
         } else {
-            adverts = advertService.getAllAdverts();
+            adverts = advertService.getAdvertsByUserId(user.getId());
         }
 
         logger.info("adding to frontend");

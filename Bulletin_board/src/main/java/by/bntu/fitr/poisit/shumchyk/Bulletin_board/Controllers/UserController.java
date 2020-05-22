@@ -44,7 +44,7 @@ public class UserController {
         if (userService.deleteUser(user)) {
             model.addAttribute("message", "user deleted");
         }
-        model.addAttribute("message", "user not deleted");
+        model.addAttribute("message", "user is not deleted");
         return "redirect:/users";
     }
 
