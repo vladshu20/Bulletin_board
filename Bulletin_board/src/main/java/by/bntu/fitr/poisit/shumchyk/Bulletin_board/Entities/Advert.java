@@ -39,6 +39,16 @@ public class Advert {
         return author;
     }
 
+    public String getAuthorName() {
+        if (author.getFirstName() != null){return author.getFirstName();
+        }else {
+            return "undifined";
+        }
+
+    }
+
+    public String getAuthorEmail(){return author.getEmail();}
+
     public void setAuthor(User author) {
         this.author = author;
     }
