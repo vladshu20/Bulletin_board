@@ -26,7 +26,7 @@ public class UserService implements UserDetailsService {
     @Autowired
     private BCryptPasswordEncoder cryptPasswordEncoder;
 
-    private static Logger logger= LogManager.getLogger(UserService.class.getName());
+    private static Logger logger = LogManager.getLogger(UserService.class.getName());
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
