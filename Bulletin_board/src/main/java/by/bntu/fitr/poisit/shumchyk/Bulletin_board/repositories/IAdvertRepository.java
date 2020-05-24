@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface IAdvertRepository extends JpaRepository<Advert, Long> {
-//    List<Advert> findByTags(Set<Tag> tags);
+
     List<Advert> findByTags(String tag);
     List<Advert> findByAuthorId(Long userId);
 
