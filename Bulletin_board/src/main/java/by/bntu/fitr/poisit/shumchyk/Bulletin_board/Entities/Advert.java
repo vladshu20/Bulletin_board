@@ -2,6 +2,8 @@ package by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities;
 
 
 import javax.persistence.*;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Advert {
@@ -14,7 +16,10 @@ public class Advert {
     @JoinColumn(name = "user_id")
     private User author;
 
-    private String tag;
+    @ElementCollection(targetClass = Tag.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "advert_tag", joinColumns = @JoinColumn(name = "advert_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<Tag> tags;
 
     private String filename;
 
@@ -53,12 +58,12 @@ public class Advert {
         this.author = author;
     }
 
-    public String getTag() {
-        return tag;
+    public Set<Tag> getTags() {
+        return tags;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
 
     public String getFilename() {
@@ -72,10 +77,13 @@ public class Advert {
     public Advert() {
     }
 
-    public Advert(String text, User author, String tag) {
+    public Advert(String text, User author, Set<Tag> tags) {
 
         this.text = text;
         this.author = author;
-        this.tag = tag;
+        this.tags = tags;
     }
+
+
+
 }

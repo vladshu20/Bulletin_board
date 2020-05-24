@@ -2,6 +2,7 @@ package by.bntu.fitr.poisit.shumchyk.Bulletin_board.services;
 
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.Controllers.MainController;
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities.Advert;
+import by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities.Tag;
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.Entities.User;
 import by.bntu.fitr.poisit.shumchyk.Bulletin_board.repositories.IAdvertRepository;
 import org.apache.logging.log4j.LogManager;
@@ -15,9 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class AdvertService {
@@ -39,9 +39,17 @@ public class AdvertService {
         return advertRepository.findAll();
     }
 
-    public List<Advert> getAdvertsByTag(String tag) {
-        return advertRepository.findByTag(tag);
+    public List<Advert> getAdvertsByTags(String tag) {
+        List<Advert> advetrs = new ArrayList<>();
+        for (Advert adv : advertRepository.findAll()) {
+            if (adv.getTags().contains(Tag.valueOf(tag))) {
+
+                advetrs.add(adv);
+            }
+        }
+        return advetrs;
     }
+
 
     public List<Advert> getAdvertsByUserId(Long id) {
         return advertRepository.findByAuthorId(id);
@@ -53,9 +61,17 @@ public class AdvertService {
 
     public void addAdvert(User user,
                           String text,
-                          String tag,
+                          Map<String, String> formTags,
                           MultipartFile file) throws IOException {
-        Advert advert = new Advert(text, user, tag);
+        Set<String> tags = Arrays.stream(Tag.values()).map(Tag::name).collect(Collectors.toSet());
+        Set<Tag> fromModelTags = new HashSet<>();
+        for (String tag : formTags.keySet()) {
+            if (tags.contains(tag)) {
+                fromModelTags.add(Tag.valueOf(tag));
+            }
+
+        }
+        Advert advert = new Advert(text, user, fromModelTags);
 
 
         if (file != null && !file.getOriginalFilename().isEmpty()) {

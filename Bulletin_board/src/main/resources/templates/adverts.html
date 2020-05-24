@@ -36,7 +36,12 @@
                 </div>
                 <div class="form-group">
                     <label class="text-info">Tag:</label><br>
-                    <input type="text" name="tag" id="tag" class="form-control">
+                    <div name="formTags" id="formTags" th:each="tag : ${tags}">
+                        <label><input type="checkbox" th:text="${tag}" th:name="${tag}"
+                                      th:value="*{tag.name()}"></label>
+
+                    </div>
+
                 </div>
                 <div><input type="submit" value="Add"/></div>
             </div>
@@ -55,8 +60,12 @@
                          alt="Card image cap">
                 </div>
                 <div class="card-body">
-                    <!--                    <span class="badge badge-primary">Главный</span>-->
-                    <h5 class="card-title" th:text="${advert.getTag()}"></h5>
+<!--                    <div th:each="tag : ${advert.getTags()}">-->
+<!--                        <span class="badge badge-primary" th:text="*{tag}"></span>-->
+<!--                    </div>-->
+
+
+<!--                    <h5 class="card-title" th:text="${advert.getTags()}"></h5>-->
                     <p class="card-text" th:text="${advert.getText()}"></p>
 
 

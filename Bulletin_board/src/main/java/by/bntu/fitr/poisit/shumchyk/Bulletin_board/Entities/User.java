@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -20,8 +21,6 @@ public class User implements UserDetails {
     @Column(name = "first_name")
     private String firstName;
     private String activationCode;
-//    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
-//    private List<Advert> adverts;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -124,5 +123,21 @@ public class User implements UserDetails {
         this.password = password;
         this.email = email;
         this.firstName = firstName;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", activationCode='" + activationCode + '\'' +
+                ", roles=" + roles +
+                ", active=" + active +
+                '}';
     }
 }
