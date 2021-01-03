@@ -16,6 +16,10 @@
 
 
 <div th:replace="fragments/navigation :: nav"></div>
+<div class="bar">
+<div th:replace="fragments/categories-nav :: cat-nav"></div>
+    <br>
+</div>
 
 
 <div class="container" align="center">
@@ -25,24 +29,28 @@
 
                 <div>
 
-                        <!--      uploads+'/'+ ${advert.filename}          -->
-                        <!--                th:attr="src=@{uploads/{image}(image=${advert.filename})}"-->
-                        <!--  working upload path         /home/vladislav/Downloads/Bulletin_board/Bulletin_board/src/main/resources/static/uploads  -->
-                        <img class="card-img-top" th:attr="src=@{/img/{image}(image=${advert.filename})}"
-                             alt="Card image cap">
+                    <!--      uploads+'/'+ ${advert.filename}          -->
+                    <!--                th:attr="src=@{uploads/{image}(image=${advert.filename})}"-->
+                    <!--  working upload path         /home/vladislav/Downloads/Bulletin_board/Bulletin_board/src/main/resources/static/uploads  -->
+                    <img class="card-img-top" th:attr="src=@{/img/{image}(image=${advert.filename})}"
+                         alt="Card image cap">
                 </div>
                 <div class="card-block">
                     <div class="card-body">
 
-                        <!--                    <span class="badge badge-primary">Главный</span>-->
-<!--                        <h5 class="card-title" th:text="${advert.getTag()}"></h5>-->
-                        <p class="card-text" th:text="${advert.getText()}"></p>
-
-
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted" th:text="${advert.getAuthorName()}"></small>
-                        <small class="text-muted" th:text="${advert.getAuthorEmail()}"></small>
+                        <div class="row">
+                            <div th:each="tag : ${advert.getTags()}">
+                                <div class="badge badge-primary col-sm-6 col-md-4 col-xl" th:text="*{tag}"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="card-text" th:text="${advert.getText()}"></p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted" th:text="${advert.getAuthorName()}"></small>
+                            <small class="text-muted" th:text="${advert.getAuthorEmail()}"></small>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,7 +58,6 @@
     </div>
 </div>
 
-</form>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>

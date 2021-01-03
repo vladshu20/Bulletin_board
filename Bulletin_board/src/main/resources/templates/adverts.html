@@ -52,20 +52,16 @@
         <div th:each="advert : ${adverts}">
             <div class="card my-3">
                 <div>
-
-                    <!--      uploads+'/'+ ${advert.filename}          -->
-                    <!--                th:attr="src=@{uploads/{image}(image=${advert.filename})}"-->
-                    <!--  working upload path         /home/vladislav/Downloads/Bulletin_board/Bulletin_board/src/main/resources/static/uploads  -->
                     <img class="card-img-top" th:attr="src=@{/img/{image}(image=${advert.filename})}"
                          alt="Card image cap">
                 </div>
                 <div class="card-body">
-<!--                    <div th:each="tag : ${advert.getTags()}">-->
-<!--                        <span class="badge badge-primary" th:text="*{tag}"></span>-->
-<!--                    </div>-->
+                    <div th:each="tag : ${advert.getTags()}">
+                        <span class="badge badge-primary" th:text="*{tag}"></span>
+                    </div>
 
 
-<!--                    <h5 class="card-title" th:text="${advert.getTags()}"></h5>-->
+                    <!--                    <h5 class="card-title" th:text="${advert.getTags()}"></h5>-->
                     <p class="card-text" th:text="${advert.getText()}"></p>
 
 

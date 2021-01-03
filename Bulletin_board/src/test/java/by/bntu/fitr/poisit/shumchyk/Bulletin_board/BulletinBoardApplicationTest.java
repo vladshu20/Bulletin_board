@@ -24,4 +24,17 @@ public class BulletinBoardApplicationTest {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",
                 String.class)).contains("Home");
     }
+
+    @Test
+    public void loginShouldReturnDefaultMessage() throws Exception {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/login",
+                String.class)).contains("Login form");
+    }
+
+    @Test
+    public void advertsShouldReturnDefaultMessage() throws Exception {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",
+                String.class)).contains("Home");
+    }
+
 }

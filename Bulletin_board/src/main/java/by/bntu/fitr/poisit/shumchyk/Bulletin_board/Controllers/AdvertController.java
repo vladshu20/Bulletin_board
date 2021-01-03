@@ -65,7 +65,7 @@ public class AdvertController {
         logger.info("passing adverts to frontend");
         model.put("adverts", adverts);
 
-        return "adverts";
+        return "redirect:/adverts";
     }
 
 
