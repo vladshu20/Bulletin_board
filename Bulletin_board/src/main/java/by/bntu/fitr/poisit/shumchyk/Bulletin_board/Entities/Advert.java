@@ -19,7 +19,7 @@ public class Advert {
     @ElementCollection(targetClass = Tag.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "advert_tag", joinColumns = @JoinColumn(name = "advert_id"))
     @Enumerated(EnumType.STRING)
-    private Set<Tag> tags;
+    private Set<String > tags;
 
     private String filename;
 
@@ -58,11 +58,11 @@ public class Advert {
         this.author = author;
     }
 
-    public Set<Tag> getTags() {
+    public Set<String > getTags() {
         return tags;
     }
 
-    public void setTags(Set<Tag> tags) {
+    public void setTags(Set<String> tags) {
         this.tags = tags;
     }
 
@@ -77,7 +77,7 @@ public class Advert {
     public Advert() {
     }
 
-    public Advert(String text, User author, Set<Tag> tags) {
+    public Advert(String text, User author, Set<String > tags) {
 
         this.text = text;
         this.author = author;

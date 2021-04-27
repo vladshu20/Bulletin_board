@@ -42,13 +42,13 @@ public class AdvertService {
     public List<Advert> getAdvertsByTags(String tag) {
         List<Advert> advetrs = new ArrayList<>();
         for (Advert adv : advertRepository.findAll()) {
-            if (adv.getTags().contains(Tag.valueOf(tag))) {
-
+            //if (adv.getTags().contains(Tag.valueOf(tag))) {
+            if (adv.getTags().contains(tag)) {
                 advetrs.add(adv);
             }
         }
         return advetrs;
-      // return advertRepository.findByTags(tag);
+        // return advertRepository.findByTags(tag);
     }
 
 
@@ -65,10 +65,10 @@ public class AdvertService {
                           Map<String, String> formTags,
                           MultipartFile file) throws IOException {
         Set<String> tags = Arrays.stream(Tag.values()).map(Tag::name).collect(Collectors.toSet());
-        Set<Tag> fromModelTags = new HashSet<>();
+        Set<String> fromModelTags = new HashSet<>();// preveously tags were of Tag type
         for (String tag : formTags.keySet()) {
             if (tags.contains(tag)) {
-                fromModelTags.add(Tag.valueOf(tag));
+                fromModelTags.add(Tag.valueOf(tag).toString());
             }
 
         }
